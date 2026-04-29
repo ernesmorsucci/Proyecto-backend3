@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const collection = 'Users';
 
-const schema = mongoose.Schema({
+const schema = new mongoose.Schema({
     first_name:{
         type:String,
         required:true
