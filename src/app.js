@@ -35,5 +35,10 @@ const mongoInstance=async()=>{
     }
 }
 
-app.listen(PORT,()=>console.log(`Listening on ${PORT}`));
-mongoInstance();
+// Start server and DB unless running tests
+if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'production') {
+    app.listen(PORT,()=>console.log(`Listening on ${PORT}`));
+    mongoInstance();
+}
+
+export default app;
