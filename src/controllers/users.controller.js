@@ -9,7 +9,7 @@ const getUser=async(req,res)=>{
     const userId=req.params.uid;
     const user=await usersService.getUserById(userId);
     if(!user) return res.status(404).send({status:'error',error:'User not found'});
-    res.send({status:'succes',payload:user});
+    res.send({status:'success',payload:user});
 }
 const updateUser=async(req,res)=>{
     const userId=req.params.uid;
@@ -17,14 +17,14 @@ const updateUser=async(req,res)=>{
     const user=await usersService.getUserById(userId);
     if(!user) return res.status(404).send({status:'error',error:'User not found'});
     const result=await usersService.update(userId,updateBody);
-    res.send({status:'succes',payload:result});
+    res.send({status:'success',payload:result});
 }
 const deleteUser=async(req,res)=>{
     const userId=req.params.uid;
     const user=await usersService.getUserById(userId);
     if(!user) return res.status(404).send({status:'error',error:'User not found'});
     const result=await usersService.delete(userId);
-    res.send({status:'succes',payload:result});
+    res.send({status:'success',payload:result});
 }
 
 export default{

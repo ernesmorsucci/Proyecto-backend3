@@ -2,13 +2,13 @@ import {adoptionService,petsService,usersService} from "../services/index.servic
 
 const getAllAdoptions=async(req,res)=>{
     const result=await adoptionService.getAll();
-    res.send({status:'succes',payload:result});
+    res.send({status:'success',payload:result});
 }
 const getAdoption=async(req,res)=>{
     const adoptionId=req.params.aid;
     const adoption=await adoptionService.getBy({_id:adoptionId});
     if(!adoption) return res.status(404).send({status:'error',error:'Adoption not found'});
-    res.send({status:'succes',payload:adoption});
+    res.send({status:'success',payload:adoption});
 }
 const createAdoption=async(req,res)=>{
     const {uid,pid} = req.params;
@@ -21,7 +21,7 @@ const createAdoption=async(req,res)=>{
     await usersService.update(user._id,{pets:user.pets});
     await petsService.update(pet._id,{adopted:true,owner:user._id});
     await adoptionService.create({owner:user._id,pet:pet._id});
-    res.send({status:'succes',message:'Pet adopted'});
+    res.send({status:'success',message:'Pet adopted'});
 }
 
 export default{
