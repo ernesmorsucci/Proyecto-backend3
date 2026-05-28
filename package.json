@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./src/app.js",
-    "test": "npx mocha ./src/test/adoption.router.test.js --timeout 50000"
+    "test": "npx mocha ./src/test/adoption.router.test.js --timeout 3000"
   },
   "keywords": [],
   "author": "",
