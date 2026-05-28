@@ -215,28 +215,12 @@ La documentación interactiva de la API está disponible con Swagger UI en:
 
 ---
 
-## Checklist de Reproducción
-
-Para reproducir el proyecto sin información adicional:
-
-- [ ] Clonar el repositorio desde [GitHub](https://github.com/ernesmorsucci/Proyecto-backend3.git)
-- [ ] Instalar Node.js v20 o superior
-- [ ] Instalar dependencias: `npm install`
-- [ ] Configurar `.env` con `MONGO_URL` válida
-- [ ] Ejecutar tests: `npm test` (deberían pasar todos)
-- [ ] Iniciar servidor: `npm start`
-- [ ] Acceder a Swagger UI: `http://localhost:9090/api/docs`
-- [ ] Alternativamente, usar Docker: descargar imagen y ejecutar contenedor
-
----
-
 ## Variables de Entorno
 
-| Variable     | Descripción           | Ejemplo                                          |
-| ------------ | --------------------- | ------------------------------------------------ |
-| `MONGO_URL`  | Conexión a MongoDB    | `mongodb+srv://user:pass@cluster.mongodb.net/db` |
-| `NODE_ENV`   | Ambiente de ejecución | `development`, `production`, `test`              |
-| `PORT`       | Puerto del servidor   | `9090`                                           |
-| `JWT_SECRET` | Clave para JWT        | `tu_secret_muy_seguro`                           |
+| Variable    | Descripción           | Ejemplo                                          |
+| ----------- | --------------------- | ------------------------------------------------ |
+| `MONGO_URL` | Conexión a MongoDB    | `mongodb+srv://user:pass@cluster.mongodb.net/db` |
+| `NODE_ENV`  | Ambiente de ejecución | `development`, `production`, `test`              |
+| `PORT`      | Puerto del servidor   | `9090`                                           |
 
 ---
