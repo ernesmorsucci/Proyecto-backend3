@@ -13,41 +13,6 @@ Sistema backend para la gestión de adopción de mascotas. API REST construida c
 
 ---
 
-## Estructura del Proyecto
-
-```
-proyecto/
-├── src/
-│   ├── app.js                    # Configuración principal de Express
-│   ├── controllers/              # Lógica de controladores
-│   │   ├── adoptions.controller.js
-│   │   ├── pets.controller.js
-│   │   ├── sessions.controller.js
-│   │   └── users.controller.js
-│   ├── dao/                      # Data Access Objects
-│   │   ├── Adoption.dao.js
-│   │   ├── Pets.dao.js
-│   │   ├── Users.dao.js
-│   │   └── models/               # Esquemas de MongoDB
-│   ├── repository/               # Capa de repositorio genérica
-│   │   ├── Generic.repository.js
-│   │   ├── Adoption.repository.js
-│   │   ├── Pet.repository.js
-│   │   └── User.repository.js
-│   ├── services/                 # Lógica de negocio
-│   ├── routes/                   # Definición de rutas
-│   ├── dto/                      # Data Transfer Objects
-│   ├── utils/                    # Utilidades (uploader, etc.)
-│   ├── docs/                     # Documentación Swagger
-│   ├── public/                   # Archivos estáticos
-│   └── test/                     # Tests automatizados
-├── Dockerfile                    # Configuración Docker
-├── package.json                  # Dependencias del proyecto
-└── readme.md                     # Este archivo
-```
-
----
-
 ## Instalación y Ejecución
 
 ### Opción 1: Ejecución con Docker (Recomendado)
