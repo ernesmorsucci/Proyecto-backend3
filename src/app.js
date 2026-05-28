@@ -3,6 +3,8 @@ import express from "express";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUiExpress from "swagger-ui-express";
 
 //routes
 import usersRouter from "./routes/users.router.js";
@@ -17,6 +19,23 @@ const PORT=process.env.PORT||8080;
 
 app.use(express.json());
 app.use(cookieParser());
+
+//docs config
+const swaggerOptions={
+    definition:{
+        openapi:'3.0.0',
+        info:{
+            title:'AdoptMe API',
+            description:'API RESTful para la gestión de adopciones de mascotas.',
+            version:'1.0.0'
+        }
+    },
+    apis:[
+        './src/docs/*.yaml',
+    ]
+}
+const specs=swaggerJSDoc(swaggerOptions);
+app.use('/api/docs',swaggerUiExpress.serve,swaggerUiExpress.setup(specs));
 
 //routes config
 app.use('/api/users',usersRouter);

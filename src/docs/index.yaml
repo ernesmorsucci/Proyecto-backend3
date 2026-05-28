@@ -1,0 +1,9 @@
+tags:
+  - name: Users
+    description: Gestión completa de usuarios del sistema
+  - name: Pets
+    description: Gestión de mascotas disponibles para adopción
+  - name: Adoptions
+    description: Registro y gestión de adopciones realizadas
+  - name: Sessions
+    description: Autenticación, registro e inicio de sesión de usuarios

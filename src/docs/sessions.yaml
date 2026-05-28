@@ -1,0 +1,141 @@
+paths:
+  /api/sessions/register:
+    post:
+      summary: Registra un nuevo usuario en la aplicación.
+      tags:
+        - Sessions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterRequest"
+      responses:
+        "201":
+          description: Usuario registrado correctamente.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Datos inválidos o usuario ya existe.
+        "500":
+          description: Error del servidor.
+
+  /api/sessions/login:
+    post:
+      summary: Inicia sesión con un usuario existente.
+      tags:
+        - Sessions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        "200":
+          description: Inicio de sesión exitoso.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "401":
+          description: Credenciales inválidas.
+        "500":
+          description: Error del servidor.
+
+  /api/sessions/current:
+    get:
+      summary: Obtiene la información del usuario actualmente autenticado.
+      tags:
+        - Sessions
+      responses:
+        "200":
+          description: Información del usuario actual.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "401":
+          description: No hay usuario autenticado.
+        "500":
+          description: Error del servidor.
+
+components:
+  schemas:
+    RegisterRequest:
+      type: object
+      properties:
+        first_name:
+          type: string
+          description: Nombre del usuario.
+        last_name:
+          type: string
+          description: Apellido del usuario.
+        email:
+          type: string
+          format: email
+          description: Correo electrónico del usuario.
+        password:
+          type: string
+          description: Contraseña del usuario.
+      required:
+        - first_name
+        - last_name
+        - email
+        - password
+      example:
+        first_name: Juan
+        last_name: Pérez
+        email: juan.perez@example.com
+        password: password123
+
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: Correo electrónico del usuario.
+        password:
+          type: string
+          description: Contraseña del usuario.
+      required:
+        - email
+        - password
+      example:
+        email: juan.perez@example.com
+        password: password123
+
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID automático generado por MongoDB.
+        first_name:
+          type: string
+          description: Nombre del usuario.
+        last_name:
+          type: string
+          description: Apellido del usuario.
+        email:
+          type: string
+          format: email
+          description: Correo electrónico del usuario.
+        role:
+          type: string
+          description: Rol del usuario (admin, user, etc.).
+        pets:
+          type: array
+          items:
+            type: string
+          description: Lista de IDs de mascotas asociadas al usuario.
+      example:
+        _id: "647fa8c9e46dbc5a20320181"
+        first_name: Juan
+        last_name: Pérez
+        email: juan.perez@example.com
+        role: user
+        pets: []

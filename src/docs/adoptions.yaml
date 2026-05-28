@@ -1,0 +1,90 @@
+paths:
+  /api/adoptions:
+    get:
+      summary: Obtiene todas las adopciones registradas.
+      tags:
+        - Adoptions
+      responses:
+        "200":
+          description: La operación se realizó con éxito.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Adoption"
+        "500":
+          description: Error del servidor.
+
+  /api/adoptions/{aid}:
+    get:
+      summary: Obtiene una adopción específica por su ID.
+      tags:
+        - Adoptions
+      parameters:
+        - name: aid
+          in: path
+          required: true
+          description: ID de la adopción a obtener.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: La operación se realizó con éxito.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Adoption"
+        "404":
+          description: Adopción no encontrada.
+        "500":
+          description: Error del servidor.
+
+  /api/adoptions/{uid}/{pid}:
+    post:
+      summary: Crea una nueva adopción entre un usuario y una mascota.
+      tags:
+        - Adoptions
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: ID del usuario que adopta.
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          description: ID de la mascota a adoptar.
+          schema:
+            type: string
+      responses:
+        "201":
+          description: Adopción creada correctamente.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Adoption"
+        "404":
+          description: Usuario o mascota no encontrado.
+        "500":
+          description: Error del servidor.
+
+components:
+  schemas:
+    Adoption:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID automático generado por MongoDB.
+        owner:
+          type: string
+          description: ID del usuario que adoptó la mascota.
+        pet:
+          type: string
+          description: ID de la mascota adoptada.
+      example:
+        _id: "647fa8c9e46dbc5a20320181"
+        owner: "647fa8c9e46dbc5a20320182"
+        pet: "647fa8c9e46dbc5a20320183"

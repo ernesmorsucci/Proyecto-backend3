@@ -1,0 +1,151 @@
+paths:
+  /api/users:
+    get:
+      summary: Obtiene todos los usuarios de la aplicación.
+      tags:
+        - Users
+      responses:
+        "200":
+          description: La operación se realizó con éxito.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        "500":
+          description: Error del servidor.
+
+  /api/users/{uid}:
+    get:
+      summary: Obtiene un usuario específico por su ID.
+      tags:
+        - Users
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: ID del usuario a obtener.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: La operación se realizó con éxito.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: Usuario no encontrado.
+        "500":
+          description: Error del servidor.
+
+    put:
+      summary: Actualiza un usuario específico por su ID.
+      tags:
+        - Users
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: ID del usuario a actualizar.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUser"
+      responses:
+        "200":
+          description: Usuario actualizado correctamente.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: Usuario no encontrado.
+        "500":
+          description: Error del servidor.
+
+    delete:
+      summary: Elimina un usuario específico por su ID.
+      tags:
+        - Users
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: ID del usuario a eliminar.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Usuario eliminado correctamente.
+        "404":
+          description: Usuario no encontrado.
+        "500":
+          description: Error del servidor.
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID automático generado por MongoDB.
+        first_name:
+          type: string
+          description: Nombre del usuario.
+        last_name:
+          type: string
+          description: Apellido del usuario.
+        email:
+          type: string
+          format: email
+          description: Correo electrónico del usuario.
+        role:
+          type: string
+          description: Rol del usuario (admin, user, etc.).
+        pets:
+          type: array
+          items:
+            type: string
+          description: Lista de IDs de mascotas asociadas al usuario.
+      example:
+        _id: "647fa8c9e46dbc5a20320181"
+        first_name: Juan
+        last_name: Pérez
+        email: juan.perez@example.com
+        role: user
+        pets: []
+
+    UpdateUser:
+      type: object
+      properties:
+        first_name:
+          type: string
+          description: Nombre del usuario.
+        last_name:
+          type: string
+          description: Apellido del usuario.
+        email:
+          type: string
+          format: email
+          description: Correo electrónico del usuario.
+        role:
+          type: string
+          description: Rol del usuario (admin, user, etc.).
+        pets:
+          type: array
+          items:
+            type: string
+          description: Lista de IDs de mascotas asociadas al usuario.
+      example:
+        first_name: Juan
+        last_name: Pérez
+        email: juan.perez@example.com
+        role: user
+        pets: []
