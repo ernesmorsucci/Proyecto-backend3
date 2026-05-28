@@ -15,7 +15,7 @@ import sessionsRouter from "./routes/sessions.router.js";
 //server config
 dotenv.config();
 const app=express();
-const PORT=process.env.PORT||8080;
+const PORT=process.env.PORT;
 
 app.use(express.json());
 app.use(cookieParser());
@@ -50,12 +50,12 @@ const mongoInstance=async()=>{
         console.log('Database conection success!');
     }catch(error){
         console.error(error);
-        procces.exit();
+        process.exit();
     }
 }
 
 // Start server and DB unless running tests
-if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV !== 'test') {
     app.listen(PORT,()=>console.log(`Listening on ${PORT}`));
     mongoInstance();
 }
